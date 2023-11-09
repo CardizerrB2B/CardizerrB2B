@@ -1,2 +1,1 @@
-# UserAuth-APIFormatLaravel10
-UserAuth&amp;APIFormatLaravel10
+# Cardizerr B2B and B2C
