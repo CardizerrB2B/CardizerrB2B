@@ -24,6 +24,8 @@ class UserProfileResource extends JsonResource
             'fullname'=>$this->fullname,
             'user_type'=>$this->user_type,
 
+            'user_type' => $this->user_type,
+
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
            

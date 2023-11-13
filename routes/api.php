@@ -19,24 +19,95 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::prefix('users')->group(function () {
-    Route::group(['namespace' => 'API\User'], function () {
+Route::prefix('admins')->group(function () {
+    Route::group(['namespace' => 'API\Admin'], function () {
         
-        //users
-        Route::post('register', 'AuthUserController@register');
-        Route::post('login', 'AuthUserController@login');
-        Route::get('get/{id}','AuthUserController@show');
+        //admins
+        Route::post('register', 'AuthAdminController@register');
+        Route::post('login', 'AuthAdminController@login');
+        Route::get('get/{id}','AuthAdminController@show');
 
 
-        // with user  auth
-        Route::group(['middleware' => ['auth:api']], function () {
+        // with admin  auth
+        Route::group(['middleware' => ['auth:admin']], function () {
             //users
-            Route::put('update', 'AuthUserController@update');
-            Route::post('logout', 'AuthUserController@logout');
-            Route::put('changePassword' , 'AuthUserController@chnagePassword');
+            Route::put('update', 'AuthAdminController@update');
+            Route::post('logout', 'AuthAdminController@logout');
+            Route::put('changePassword' , 'AuthAdminController@chnagePassword');
 
   
+        });
 
+    });
+
+});
+
+
+
+Route::prefix('distributors')->group(function () {
+    Route::group(['namespace' => 'API\Distributor'], function () {
+        
+        //admins
+        Route::post('register', 'AuthDistributorController@register');
+        Route::post('login', 'AuthDistributorController@login');
+        Route::get('get/{id}','AuthDistributorController@show');
+
+
+        // with admin  auth
+        Route::group(['middleware' => ['auth:admin']], function () {
+            //users
+            Route::put('update', 'AuthDistributorController@update');
+            Route::post('logout', 'AuthDistributorController@logout');
+            Route::put('changePassword' , 'AuthDistributorController@chnagePassword');
+
+  
+        });
+
+    });
+
+});
+
+Route::prefix('chargers')->group(function () {
+    Route::group(['namespace' => 'API\Charger'], function () {
+        
+        //admins
+        Route::post('register', 'AuthChargerController@register');
+        Route::post('login', 'AuthChargerController@login');
+        Route::get('get/{id}','AuthChargerController@show');
+
+
+        // with admin  auth
+        Route::group(['middleware' => ['auth:admin']], function () {
+            //users
+            Route::put('update', 'AuthChargerController@update');
+            Route::post('logout', 'AuthChargerController@logout');
+            Route::put('changePassword' , 'AuthChargerController@chnagePassword');
+
+  
+        });
+
+    });
+
+});
+
+
+Route::prefix('marchents')->group(function () {
+    Route::group(['namespace' => 'API\Marchent'], function () {
+        
+        //admins
+        Route::post('register', 'AuthMarchentController@register');
+        Route::post('login', 'AuthMarchentController@login');
+        Route::get('get/{id}','AuthMarchentController@show');
+
+
+        // with admin  auth
+        Route::group(['middleware' => ['auth:admin']], function () {
+            //users
+            Route::put('update', 'AuthMarchentController@update');
+            Route::post('logout', 'AuthMarchentController@logout');
+            Route::put('changePassword' , 'AuthMarchentController@chnagePassword');
+
+  
         });
 
     });

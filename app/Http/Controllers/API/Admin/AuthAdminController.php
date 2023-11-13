@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\User;
+namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
-class AuthUserController extends ApiController
+class AuthAdminController extends ApiController
 {
 
     public function show($id)
@@ -38,6 +38,7 @@ class AuthUserController extends ApiController
             "mobile_number"=> $request->mobile_number,
             "email"=> $request->email,
             "fullname"=> $request->fullname,
+            'user_type'=>$request->user_type
         ]);
 
         return $this->successStatus((__('msg.successStatus')));
@@ -45,28 +46,23 @@ class AuthUserController extends ApiController
 
     public function login(LoginUserRequest $request)
     {
-        $user = User::where('mobile_number', $request->mobile_number)->first();
+        $user = User::whereIn('user_type',['SA','Admin'])
+                    ->where('username', $request->username)->first();
   
-
         if (empty($user)) {
             return $this->errorStatus(__('msg.wrongCreds'));
         }
 
-        if ($user->enable === 0) {
-            return $this->errorStatus(__('msg.disableUser'));
-        }
- 
+        if (!Hash::check($request->password, $user->password)) {
+            return $this->errorStatus(__('msg.wrongCreds'));
 
-        if (!auth()->guard('api')->setUser($user)) {
+        }
+   
+
+        if (!auth()->guard('admin')->setUser($user)) {
             return $this->errorStatus(__('msg.Unauthorized'));
         }
-        $user = auth('api')->user();
-
-        // if (!Auth::guard('web')->attempt($request->only('email', 'password'))) {
-        //     return $this->errorStatus(__('msg.Unauthorized'));
-        // }
-      
-        // $user = auth('web')->user();
+        $user = auth('admin')->user();
 
         return $this->sendResponse(new UserMemberResource($user), __('msg.Login'));
 
@@ -77,7 +73,6 @@ class AuthUserController extends ApiController
 
     public function update(UpdateUserRequest $request)
     {
-       // dd(Auth::user());
 
         if (!Hash::check($request->current_password, Auth::user()->password)) {
             return $this->errorStatus(__('msg.checkPassword'));
@@ -113,11 +108,11 @@ class AuthUserController extends ApiController
 
     public function logout()
     {
-        if (!auth('api')->check()) {
+        if (!auth('admin')->check()) {
             return  $this->errorUnauthenticated();
         }
 
-        auth('api')->user()->token()->revoke();
+        auth('admin')->user()->token()->revoke();
 
         return $this->respondWithMessage(__('msg.logout'));
     }
@@ -126,7 +121,6 @@ class AuthUserController extends ApiController
     
     public function chnagePassword(ChangePasswordRequest $request)
     {
-       // dd(auth()->user()->password);
         if (!Hash::check($request->current_password,auth()->user()->password))
         {
             return $this->errorStatus(__('msg.checkPassword'));

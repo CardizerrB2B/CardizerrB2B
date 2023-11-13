@@ -28,7 +28,7 @@ class UserMemberResource extends JsonResource
             'mobile_number'=>$this->mobile_number,
             'email'=>$this->email,
             'fullname'=>$this->fullname,
-            'user_type'=>$this->user_type,
+            'user_type' => $this->user_type,
 
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,

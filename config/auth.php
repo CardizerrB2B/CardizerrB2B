@@ -41,7 +41,27 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
+        // 'api' => [
+        //     'driver' => 'passport',
+        //     'provider' => 'users',
+        // ],
+
+        'admin' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+
+        'Distributor' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+
+        'Marchent' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+
+        'Charger' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],

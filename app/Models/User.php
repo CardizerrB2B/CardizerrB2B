@@ -24,7 +24,7 @@ class User extends Authenticatable
         'mobile_number',
         'email',
         'fullname',
-
+        'user_type'
     ];
 
     // protected $guarded =[]; 
@@ -50,14 +50,4 @@ class User extends Authenticatable
     ];
 
 
-    public function myFollow()
-    {
-        return $this->hasMany(follow::class,'follower_user_id','id');
-
-    }
-
-    public function myFollower()
-    {
-        return $this->hasMany(follow::class,'follower_user_id','id');
-    }
 }
