@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\Distributor;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Users\RegisterUserRequest;
 use App\Http\Requests\Users\LoginUserRequest;
 
 use App\Http\Requests\Users\UpdateUserRequest;
@@ -22,31 +21,17 @@ use Illuminate\Support\Facades\Hash;
 class AuthMarchentController extends ApiController
 {
 
-    public function show($id)
+    public function showMyProfile()
     {
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
 
         return $this->respondWithItem(new UserProfileResource($user) );
     }
 
-
-    public function register(RegisterUserRequest $request)
-    {
-        User::create([
-            "username" => $request->username,
-            "password"=> $request->password,
-            "mobile_number"=> $request->mobile_number,
-            "email"=> $request->email,
-            "fullname"=> $request->fullname,
-            'user_type'=>$request->user_type
-        ]);
-
-        return $this->successStatus((__('msg.successStatus')));
-    }
-
+   
     public function login(LoginUserRequest $request)
     {
-        $user = User::whereIn('user_type',['SA','Admin'])
+        $user = User::where('user_type','marchent')
                     ->where('username', $request->username)->first();
   
         if (empty($user)) {
@@ -59,10 +44,10 @@ class AuthMarchentController extends ApiController
         }
    
 
-        if (!auth()->guard('admin')->setUser($user)) {
+        if (!auth()->guard('marchent')->setUser($user)) {
             return $this->errorStatus(__('msg.Unauthorized'));
         }
-        $user = auth('admin')->user();
+        $user = auth('marchent')->user();
 
         return $this->sendResponse(new UserMemberResource($user), __('msg.Login'));
 
@@ -108,11 +93,11 @@ class AuthMarchentController extends ApiController
 
     public function logout()
     {
-        if (!auth('api')->check()) {
+        if (!auth('marchent')->check()) {
             return  $this->errorUnauthenticated();
         }
 
-        auth('api')->user()->token()->revoke();
+        auth('marchent')->user()->token()->revoke();
 
         return $this->respondWithMessage(__('msg.logout'));
     }

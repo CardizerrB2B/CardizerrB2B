@@ -24,7 +24,9 @@ class User extends Authenticatable
         'mobile_number',
         'email',
         'fullname',
-        'user_type'
+        'user_type',
+        'createdBy_id',
+        'distributor_id'
     ];
 
     // protected $guarded =[]; 

@@ -47,20 +47,23 @@ Route::prefix('admins')->group(function () {
 Route::prefix('distributors')->group(function () {
     Route::group(['namespace' => 'API\Distributor'], function () {
         
-        //admins
-        Route::post('register', 'AuthDistributorController@register');
+        //distributors
         Route::post('login', 'AuthDistributorController@login');
-        Route::get('get/{id}','AuthDistributorController@show');
 
-
-        // with admin  auth
+        // with distributor auth
         Route::group(['middleware' => ['auth:admin']], function () {
-            //users
+            //distributors
             Route::put('update', 'AuthDistributorController@update');
             Route::post('logout', 'AuthDistributorController@logout');
             Route::put('changePassword' , 'AuthDistributorController@chnagePassword');
+            Route::get('get/myProfile','AuthDistributorController@showMyProfile');
 
-  
+            // managment marchents
+            Route::post('marchents/newAccount', 'Management\MarchentController@createNewAccount');
+            Route::get('marchents/all', 'Management\MarchentController@allMyMarchents');
+            Route::get('marchents/showAccount/{id}', 'Management\MarchentController@showAccount');
+            Route::put('marchents/updateAccount/{id}', 'Management\MarchentController@updateAccount');
+
         });
 
     });
@@ -70,15 +73,15 @@ Route::prefix('distributors')->group(function () {
 Route::prefix('chargers')->group(function () {
     Route::group(['namespace' => 'API\Charger'], function () {
         
-        //admins
+        //chargers
         Route::post('register', 'AuthChargerController@register');
         Route::post('login', 'AuthChargerController@login');
         Route::get('get/{id}','AuthChargerController@show');
 
 
-        // with admin  auth
+        // with charger  auth
         Route::group(['middleware' => ['auth:admin']], function () {
-            //users
+            //chargers
             Route::put('update', 'AuthChargerController@update');
             Route::post('logout', 'AuthChargerController@logout');
             Route::put('changePassword' , 'AuthChargerController@chnagePassword');
@@ -94,18 +97,16 @@ Route::prefix('chargers')->group(function () {
 Route::prefix('marchents')->group(function () {
     Route::group(['namespace' => 'API\Marchent'], function () {
         
-        //admins
-        Route::post('register', 'AuthMarchentController@register');
+        //marchents
         Route::post('login', 'AuthMarchentController@login');
-        Route::get('get/{id}','AuthMarchentController@show');
 
-
-        // with admin  auth
+        // with marchent  auth
         Route::group(['middleware' => ['auth:admin']], function () {
-            //users
+            //marchents
             Route::put('update', 'AuthMarchentController@update');
             Route::post('logout', 'AuthMarchentController@logout');
             Route::put('changePassword' , 'AuthMarchentController@chnagePassword');
+            Route::get('get/myProfile','AuthDistributorController@showMyProfile');
 
   
         });

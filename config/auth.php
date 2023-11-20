@@ -51,17 +51,17 @@ return [
             'provider' => 'users',
         ],
 
-        'Distributor' => [
+        'distributor' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],
 
-        'Marchent' => [
+        'marchent' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],
 
-        'Charger' => [
+        'charger' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],

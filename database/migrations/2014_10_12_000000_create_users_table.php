@@ -22,6 +22,9 @@ return new class extends Migration
 
             $table->enum('user_type', ['SA','Admin','Distributor','Marchent','Charger'])->default('Marchent');
 
+            $table->integer('createdBy_id')->unsigned()->nullable();
+            $table->integer('distributor_id')->unsigned()->nullable(); // if the user type is Marchent
+
 
             $table->timestamp('email_verified_at')->nullable();
         
