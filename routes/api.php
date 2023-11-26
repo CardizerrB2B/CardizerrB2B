@@ -30,10 +30,18 @@ Route::prefix('admins')->group(function () {
 
         // with admin  auth
         Route::group(['middleware' => ['auth:admin']], function () {
-            //users
+            //admins
             Route::put('update', 'AuthAdminController@update');
             Route::post('logout', 'AuthAdminController@logout');
             Route::put('changePassword' , 'AuthAdminController@chnagePassword');
+            
+            // managment distributors
+            Route::post('distributors/newAccount', 'Management\DistributorController@createNewAccount');
+            Route::get('distributors/all', 'Management\DistributorController@allMyMarchents');
+            Route::post('distributors/search', 'Management\DistributorController@search');
+            Route::get('distributors/showAccount/{id}', 'Management\DistributorController@showAccount');
+            Route::put('distributors/updateAccount/{id}', 'Management\DistributorController@updateAccount');
+            Route::post('distributors/delete/{id}', 'Management\DistributorController@destroy');
 
   
         });
@@ -61,8 +69,11 @@ Route::prefix('distributors')->group(function () {
             // managment marchents
             Route::post('marchents/newAccount', 'Management\MarchentController@createNewAccount');
             Route::get('marchents/all', 'Management\MarchentController@allMyMarchents');
+            Route::post('marchents/search', 'Management\MarchentController@search');
             Route::get('marchents/showAccount/{id}', 'Management\MarchentController@showAccount');
             Route::put('marchents/updateAccount/{id}', 'Management\MarchentController@updateAccount');
+            Route::post('marchents/delete/{id}', 'Management\MarchentController@destroy');
+
 
         });
 

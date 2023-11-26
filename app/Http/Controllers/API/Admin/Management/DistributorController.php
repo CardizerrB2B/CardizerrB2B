@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Distributor\Management;
+namespace App\Http\Controllers\API\Admin\Management;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\Users\CreateNewUserRequest;
@@ -16,39 +16,38 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
-class MarchentController extends ApiController
+class DistributorController extends ApiController
 {
-    public function allMyMarchents()
+    public function allMyDistributor()
     {
-        //$marchents = User::withTrashed()->where('user_type','Marchent')// both deleted and not
-        $marchents = User::where('user_type','Marchent')
-                     ->where('distributor_id',auth()->user()->id)->get();
-        return new UserProfilesCollection($marchents);
+        //$distributors = User::withTrashed()->where('user_type','Distributor')// both deleted and not
+        $distributors = User::where('user_type','Distributor')
+                             ->get();
+        return new UserProfilesCollection($distributors);
     }
 
     public function showAccount($id)
     {
-        $marchent = User::whereId($id)->where('user_type','Marchent')
-                     ->where('distributor_id',auth()->user()->id)->first();
-        if (empty($marchent)) {
+        $distributor = User::whereId($id)->where('user_type','Distributor')
+                            ->first();
+        if (empty($distributor)) {
                     return $this->errorStatus(__('msg.errorNotFound'));
                 }
-        return $this->respondWithItem(new UserProfileResource($marchent) );
+        return $this->respondWithItem(new UserProfileResource($distributor) );
     }
 
 
     public function search(SearchUserRequest $request)
     {
         $key = $request->key;
-        $marchents = User::where('user_type','Marchent')
-                          ->where('distributor_id',auth()->user()->id)
+        $distributors = User::where('user_type','Distributor')
                           ->when($key,function($q) use($key){
                               $q->where('id','like','%'.$key.'%')
                                 ->orWhere('mobile_number','like','%'.$key.'%')
                                 ->orWhere('username','like','%'.$key.'%') ;
                           })
                         ->paginate(20);
-        return new UserProfilesCollection($marchents);
+        return new UserProfilesCollection($distributors);
 
     }
 
@@ -66,9 +65,8 @@ class MarchentController extends ApiController
                 "mobile_number"=> $request->mobile_number,
                 "email"=> $request->email,
                 "fullname"=> $request->fullname,
-                'user_type'=>'Marchent',
+                'user_type'=>'Distributor',
                 "createdBy_id"=> auth()->user()->id,
-                "distributor_id"=> auth()->user()->id,
 
             ]);
 
@@ -86,26 +84,25 @@ class MarchentController extends ApiController
             return $this->errorStatus(__('msg.checkPassword'));
 
         }else{
-            $marchent = User::where('user_type','Marchent')
-                            ->where('distributor_id',auth()->user()->id)->whereId($id)->first();
+            $distributor = User::where('user_type','Distributor')->whereId($id)->first();
 
-            if (empty($marchent)) {
+            if (empty($distributor)) {
                 return $this->errorStatus(__('msg.errorNotFound'));
             }
 
             if($request->input('mobile_number'))
             {
-                $marchent->update(['mobile_number'=>$request->mobile_number]);
+                $distributor->update(['mobile_number'=>$request->mobile_number]);
             }
 
             if($request->input('email'))
             {
-                $marchent->update(['email'=>$request->email]);
+                $distributor->update(['email'=>$request->email]);
             }
 
             if($request->input('fullname'))
             {
-                $marchent->update(['fullname'=>$request->fullname]);
+                $distributor->update(['fullname'=>$request->fullname]);
             }
 
             
@@ -121,28 +118,28 @@ class MarchentController extends ApiController
             return $this->errorStatus(__('msg.checkPassword'));
 
         }else{
-            $marchent = User::withTrashed()->whereId($id)->where('distributor_id',auth()->user()->id)->first();
-                if ($marchent->trashed()) {
+            $distributor = User::withTrashed()->whereId($id)->first();
+                if ($distributor->trashed()) {
                     // The record is soft deleted
                     return $this->errorStatus(__('msg.theRecordAlreadyDeleted'));
                 }
-            $marchent->delete();
+            $distributor->delete();
             return $this->respondWithMessage(__('msg.deleted'));
 
         }
 
     }
 
-    public function GetSoftDeletedMarchents()
+    public function GetSoftDeletedDistributors()
     {
-        $softDeletedMarchents = User::onlyTrashed()->get();
+        $softDeletedDistributors = User::onlyTrashed()->get();
 
     }
 
     public function restore($id)
     {
-        $marchent = User::withTrashed()->find($id);
-        $marchent->restore();
+        $distributor = User::withTrashed()->find($id);
+        $distributor->restore();
 
     }
 

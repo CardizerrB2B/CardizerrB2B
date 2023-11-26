@@ -30,6 +30,8 @@ return new class extends Migration
         
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes(); // Add this line to enable soft deletes
+
 
         });
     }
