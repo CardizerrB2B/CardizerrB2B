@@ -18,7 +18,7 @@ use App\Models\User;
 
 class DistributorController extends ApiController
 {
-    public function allMyDistributor()
+    public function allMyDistributors()
     {
         //$distributors = User::withTrashed()->where('user_type','Distributor')// both deleted and not
         $distributors = User::where('user_type','Distributor')
@@ -42,11 +42,15 @@ class DistributorController extends ApiController
         $key = $request->key;
         $distributors = User::where('user_type','Distributor')
                           ->when($key,function($q) use($key){
-                              $q->where('id','like','%'.$key.'%')
-                                ->orWhere('mobile_number','like','%'.$key.'%')
-                                ->orWhere('username','like','%'.$key.'%') ;
+                              $q->where(function($q) use($key){
+                                    $q->where('id','like','%'.$key.'%')
+                                        ->orWhere('mobile_number','like','%'.$key.'%')
+                                        ->orWhere('username','like','%'.$key.'%') ;
+                              });
                           })
                         ->paginate(20);
+
+                        
         return new UserProfilesCollection($distributors);
 
     }

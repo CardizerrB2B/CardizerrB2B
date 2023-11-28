@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Hash;
 class AuthAdminController extends ApiController
 {
 
-    public function show($id)
+    public function showMyProfile()
     {
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
 
         return $this->respondWithItem(new UserProfileResource($user) );
     }

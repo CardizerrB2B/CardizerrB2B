@@ -9,7 +9,7 @@ class SearchUserRequest extends APIRequest
     public function rules(): array
     {
         return [
-            'key' =>'required|string',
+            'key' =>'nullable|string',
         ];
     }
 }

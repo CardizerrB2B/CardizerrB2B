@@ -25,8 +25,6 @@ Route::prefix('admins')->group(function () {
         //admins
         Route::post('register', 'AuthAdminController@register');
         Route::post('login', 'AuthAdminController@login');
-        Route::get('get/{id}','AuthAdminController@show');
-
 
         // with admin  auth
         Route::group(['middleware' => ['auth:admin']], function () {
@@ -34,14 +32,25 @@ Route::prefix('admins')->group(function () {
             Route::put('update', 'AuthAdminController@update');
             Route::post('logout', 'AuthAdminController@logout');
             Route::put('changePassword' , 'AuthAdminController@chnagePassword');
+            Route::get('get/myProfile','AuthAdminController@showMyProfile');
+
             
             // managment distributors
             Route::post('distributors/newAccount', 'Management\DistributorController@createNewAccount');
-            Route::get('distributors/all', 'Management\DistributorController@allMyMarchents');
+            Route::get('distributors/all', 'Management\DistributorController@allMyDistributors');
             Route::post('distributors/search', 'Management\DistributorController@search');
             Route::get('distributors/showAccount/{id}', 'Management\DistributorController@showAccount');
             Route::put('distributors/updateAccount/{id}', 'Management\DistributorController@updateAccount');
             Route::post('distributors/delete/{id}', 'Management\DistributorController@destroy');
+
+
+           // managment chargers
+            Route::post('chargers/newAccount', 'Management\ChargerController@createNewAccount');
+            Route::get('chargers/all', 'Management\ChargerController@allMyChargers');
+            Route::post('chargers/search', 'Management\ChargerController@search');
+            Route::get('chargers/showAccount/{id}', 'Management\ChargerController@showAccount');
+            Route::put('chargers/updateAccount/{id}', 'Management\ChargerController@updateAccount');
+            Route::post('chargers/delete/{id}', 'Management\ChargerController@destroy');
 
   
         });
@@ -59,7 +68,7 @@ Route::prefix('distributors')->group(function () {
         Route::post('login', 'AuthDistributorController@login');
 
         // with distributor auth
-        Route::group(['middleware' => ['auth:admin']], function () {
+        Route::group(['middleware' => ['auth:distributor']], function () {
             //distributors
             Route::put('update', 'AuthDistributorController@update');
             Route::post('logout', 'AuthDistributorController@logout');
@@ -85,17 +94,16 @@ Route::prefix('chargers')->group(function () {
     Route::group(['namespace' => 'API\Charger'], function () {
         
         //chargers
-        Route::post('register', 'AuthChargerController@register');
         Route::post('login', 'AuthChargerController@login');
-        Route::get('get/{id}','AuthChargerController@show');
 
 
         // with charger  auth
-        Route::group(['middleware' => ['auth:admin']], function () {
+        Route::group(['middleware' => ['auth:charger']], function () {
             //chargers
             Route::put('update', 'AuthChargerController@update');
             Route::post('logout', 'AuthChargerController@logout');
             Route::put('changePassword' , 'AuthChargerController@chnagePassword');
+            Route::get('get/myProfile','AuthChargerController@showMyProfile');
 
   
         });
@@ -112,12 +120,12 @@ Route::prefix('marchents')->group(function () {
         Route::post('login', 'AuthMarchentController@login');
 
         // with marchent  auth
-        Route::group(['middleware' => ['auth:admin']], function () {
+        Route::group(['middleware' => ['auth:marchent']], function () {
             //marchents
             Route::put('update', 'AuthMarchentController@update');
             Route::post('logout', 'AuthMarchentController@logout');
             Route::put('changePassword' , 'AuthMarchentController@chnagePassword');
-            Route::get('get/myProfile','AuthDistributorController@showMyProfile');
+            Route::get('get/myProfile','AuthMarchentController@showMyProfile');
 
   
         });

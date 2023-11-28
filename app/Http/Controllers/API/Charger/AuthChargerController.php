@@ -22,27 +22,14 @@ use Illuminate\Support\Facades\Hash;
 class AuthChargerController extends ApiController
 {
 
-    public function show($id)
+    public function showMyProfile()
     {
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
 
         return $this->respondWithItem(new UserProfileResource($user) );
     }
 
 
-    public function register(RegisterUserRequest $request)
-    {
-        User::create([
-            "username" => $request->username,
-            "password"=> $request->password,
-            "mobile_number"=> $request->mobile_number,
-            "email"=> $request->email,
-            "fullname"=> $request->fullname,
-            'user_type'=>$request->user_type
-        ]);
-
-        return $this->successStatus((__('msg.successStatus')));
-    }
 
     public function login(LoginUserRequest $request)
     {
