@@ -32,3 +32,17 @@ if (!function_exists('storeMedia')) {
         );
     }
 }
+
+
+
+if (!function_exists('updateMedia')) {
+    function updateMedia($file,$path, $id )
+    {
+        DB::table('madias')->where('mediable_id', $id)->update(
+            [
+                'file' => upload($file, $path),
+
+            ]
+        );
+    }
+}

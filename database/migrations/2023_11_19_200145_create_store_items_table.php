@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('marchent_id')->unsigned()->nullable();
             $table->boolean('isSold')->default(0);
             $table->date('sold_date')->nullable();
+            $table->softDeletes(); // Add this line to enable soft deletes
+
             $table->timestamps();
         });
     }

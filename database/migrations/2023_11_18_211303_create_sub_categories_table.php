@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('category_id')->unsigned();
             $table->string('name');
+            $table->softDeletes(); // Add this line to enable soft deletes
 
             $table->timestamps();
         });

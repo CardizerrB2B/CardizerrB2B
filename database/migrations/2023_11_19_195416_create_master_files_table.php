@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('lastEditBy_id')->unsigned()->nullable();
             $table->integer('sub_category_id')->unsigned();
 
+            $table->softDeletes(); // Add this line to enable soft deletes
 
             $table->timestamps();
         });

@@ -33,9 +33,9 @@ Route::prefix('admins')->group(function () {
             Route::post('logout', 'AuthAdminController@logout');
             Route::put('changePassword' , 'AuthAdminController@chnagePassword');
             Route::get('get/myProfile','AuthAdminController@showMyProfile');
-
+          #############################################################################################################
             
-            // managment distributors
+            // management distributors
             Route::post('distributors/newAccount', 'Management\DistributorController@createNewAccount');
             Route::get('distributors/all', 'Management\DistributorController@allMyDistributors');
             Route::post('distributors/search', 'Management\DistributorController@search');
@@ -44,13 +44,44 @@ Route::prefix('admins')->group(function () {
             Route::post('distributors/delete/{id}', 'Management\DistributorController@destroy');
 
 
-           // managment chargers
+           // management chargers
             Route::post('chargers/newAccount', 'Management\ChargerController@createNewAccount');
             Route::get('chargers/all', 'Management\ChargerController@allMyChargers');
             Route::post('chargers/search', 'Management\ChargerController@search');
             Route::get('chargers/showAccount/{id}', 'Management\ChargerController@showAccount');
             Route::put('chargers/updateAccount/{id}', 'Management\ChargerController@updateAccount');
             Route::post('chargers/delete/{id}', 'Management\ChargerController@destroy');
+            ###################################################################################################
+
+           ############################Products Settings#####################################################
+
+           //categories
+           Route::get('products/categories/all','Products\CatgeoryController@index');
+           Route::post('products/categories/search','Products\CatgeoryController@search');
+           Route::post('products/categories/store','Products\CatgeoryController@store');
+           Route::put('products/categories/update/{id}','Products\CatgeoryController@update');
+           Route::post('products/categories/destroy/{id}','Products\CatgeoryController@destroy');
+           Route::get('products/categories/{id}','Products\CatgeoryController@show');
+
+          //sub-categories
+          Route::get('products/subCategories/all','Products\SubCategoryController@index');
+          Route::post('products/subCategories/search','Products\SubCategoryController@search');
+          Route::post('products/subCategories/store','Products\SubCategoryController@store');
+          Route::put('products/subCategories/update/{id}','Products\SubCategoryController@update');
+          Route::post('products/subCategories/destroy/{id}','Products\SubCategoryController@destroy');
+          Route::get('products/subCategories/{id}','Products\SubCategoryController@show');
+
+
+          //secure-typess
+          Route::get('products/secureTypes/all','Products\ProductSecureTypeController@index');
+          Route::post('products/secureTypes/search','Products\ProductSecureTypeController@search');
+          Route::post('products/secureTypes/store','Products\ProductSecureTypeController@store');
+          Route::put('products/secureTypes/update/{id}','Products\ProductSecureTypeController@update');
+          Route::post('products/secureTypes/destroy/{id}','Products\ProductSecureTypeController@destroy');
+          Route::get('products/secureTypes/{id}','Products\ProductSecureTypeController@show');
+
+
+        #################################################################################################################################   
 
   
         });

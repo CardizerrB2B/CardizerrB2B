@@ -86,5 +86,9 @@ return [
 
     'sendSubscribers' => 'Subscribers sent successfully',
     'CouponNotFound'=>"Coupon Not Found",
+
+    'deleted' => 'the record has been deleted',
+    'theRecordAlreadyDeleted'=>'The record has been already deleted'
+
    ];
 

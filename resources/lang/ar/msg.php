@@ -57,5 +57,9 @@ return [
     'assignRole'=>'تم تعيين الدور لعضو الشركة',
     'paymentError'=>'عذرا ، لا يمكن معالجة الدفع',
     'CouponNotFound'=>"كود غير موجود",
+
+    'deleted' => 'تم حذف السجل',
+    'theRecordAlreadyDeleted'=>'لقد تم حذف السجل بالفعل'
+
 ];
 

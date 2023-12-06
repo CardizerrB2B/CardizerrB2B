@@ -18,6 +18,8 @@ return new class extends Migration
             $table->boolean('is_active')->default(1);
             $table->integer('createdBy_id')->unsigned();
             $table->integer('lastEditBy_id')->unsigned()->nullable();
+            $table->softDeletes(); // Add this line to enable soft deletes
+
             $table->timestamps();
         });
     }
