@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('owener_id')->unsigned();//Distributor_id
+            $table->integer('owner_id')->unsigned();//Distributor_id
             $table->boolean('is_active')->default(1);
             $table->integer('createdBy_id')->unsigned();
             $table->integer('lastEditBy_id')->unsigned()->nullable();

@@ -5,7 +5,7 @@ namespace App\Http\Resources\Admins\Products;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MasterFileResource extends JsonResource
+class StoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,15 +16,11 @@ class MasterFileResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'sub_category_id'=>$this->sub_category_id,
-            'item_code'=>$this->item_code,
-            'description'=>$this->description,
-            'retail_price'=>$this->retail_price,
-            'is_active'=>$this->is_active,
-            'createdBy_id'=>$this->createdBy_id,
-            'lastEditBy_id'=>$this->lastEditBy_id,
-            'image'=>$this->image_path??'',
+            'name'=>$this->name,
 
+            'owner_id'=>$this->owner_id,
+            'owner_name'=>$this->distributor->fullname??'',
+            'createdBy_id'=>$this->createdBy_id,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
 

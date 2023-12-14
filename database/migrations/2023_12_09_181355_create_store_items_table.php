@@ -13,16 +13,14 @@ return new class extends Migration
     {
         Schema::create('store_items', function (Blueprint $table) {
            // for one valid usage item by adding & purchasing  processes
-            $table->id();
-            $table->integer('master_store_id')->unsigned();
+           $table->id();
+           $table->integer('master_store_id')->unsigned();
 
-            $table->string('product_secure_type_value');
-            $table->integer('marchent_id')->unsigned()->nullable();
-            $table->boolean('isSold')->default(0);
-            $table->date('sold_date')->nullable();
-            $table->softDeletes(); // Add this line to enable soft deletes
-
-            $table->timestamps();
+           $table->string('product_secure_type_value');
+           $table->integer('marchent_id')->unsigned()->nullable();
+           $table->boolean('isSold')->default(0);
+           $table->date('sold_date')->nullable();
+           $table->softDeletes(); // Add this line to enable soft deletes
         });
     }
 

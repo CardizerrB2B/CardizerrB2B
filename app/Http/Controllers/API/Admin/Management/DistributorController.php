@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Store;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class DistributorController extends ApiController
 {
@@ -64,17 +67,39 @@ class DistributorController extends ApiController
             return $this->errorStatus(__('msg.checkPassword'));
 
         }else{
-            User::create([
-                "username" => $request->username,
-                "mobile_number"=> $request->mobile_number,
-                "email"=> $request->email,
-                "fullname"=> $request->fullname,
-                'user_type'=>'Distributor',
-                "createdBy_id"=> auth()->user()->id,
 
-            ]);
+            try {
 
-        return $this->successStatus((__('msg.successStatus')));
+                DB::beginTransaction();
+
+                    $distributor= User::create([
+                        "username" => $request->username,
+                        "mobile_number"=> $request->mobile_number,
+                        "email"=> $request->email,
+                        "fullname"=> $request->fullname,
+                        'user_type'=>'Distributor',
+                        "createdBy_id"=> auth()->user()->id,
+        
+                    ]);
+        
+                    Store::create([
+                        'name'=>$distributor->fullname,
+                        'owner_id'=>$distributor->id,
+                        "createdBy_id"=> auth()->user()->id,
+        
+                    ]);
+                
+                DB::commit();
+                return $this->successStatus((__('msg.successStatus')));
+
+            } catch (\Exception $exception) {
+                DB::rollBack();
+                return $this->errorStatus(__($exception->getMessage()));
+            }
+
+
+
+
       }
 
         

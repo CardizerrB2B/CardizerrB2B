@@ -33,7 +33,14 @@ class User extends Authenticatable
         'distributor_id'
     ];
 
-    // protected $guarded =[]; 
+
+    ##### distributor section ###################
+
+    public function myStore()
+    {
+        return $this->hasOne(Store::class,'distributor_id','id');
+    }
+    #############################################
 
     /**
      * The attributes that should be hidden for serialization.

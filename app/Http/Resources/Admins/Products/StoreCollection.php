@@ -5,10 +5,9 @@ namespace App\Http\Resources\Admins\Products;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class MasterFileCollection extends ResourceCollection
+class StoreCollection extends ResourceCollection
 {
-    public $collects = MasterFileResource::class;
-
+    public $collects = StoreResource::class;
     public function toArray(Request $request): array
     {
         return [

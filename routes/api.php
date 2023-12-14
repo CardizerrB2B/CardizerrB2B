@@ -80,6 +80,32 @@ Route::prefix('admins')->group(function () {
           Route::post('products/secureTypes/destroy/{id}','Products\ProductSecureTypeController@destroy');
           Route::get('products/secureTypes/{id}','Products\ProductSecureTypeController@show');
 
+          //masterFile products
+          Route::get('products/masterFile/all','Products\MasterFileController@index');
+          Route::post('products/masterFile/search','Products\MasterFileController@search');
+          Route::post('products/masterFile/store','Products\MasterFileController@store');
+          Route::put('products/masterFile/update/{id}','Products\MasterFileController@update');
+          Route::post('products/masterFile/destroy/{id}','Products\MasterFileController@destroy');
+          Route::get('products/masterFile/{id}','Products\MasterFileController@show');
+
+          //distributors stores
+          Route::get('products/stores/all','Products\StoreController@index');
+          Route::post('products/stores/search','Products\StoreController@search');
+          Route::post('products/stores/destroy/{id}','Products\StoreController@destroy');
+          Route::get('products/stores/{id}','Products\StoreController@show');
+
+
+          //purchase orders 
+          Route::get('products/purchaseOrders/all','Products\PurchaseOrderController@getPurchaseOrders');
+          Route::post('products/purchaseOrders/search','Products\PurchaseOrderController@search');
+          Route::post('products/purchaseOrders/store','Products\PurchaseOrderController@store');
+          Route::get('products/purchaseOrders/destroy/{id}','Products\PurchaseOrderController@canceleOrder');
+          Route::get('products/purchaseOrders/confirmOrder/{id}','Products\PurchaseOrderController@confirmOrder');
+          Route::get('products/purchaseOrders/receiveOrder/{id}','Products\PurchaseOrderController@receiveOrder');
+
+          Route::get('products/purchaseOrders/{id}','Products\PurchaseOrderController@show');
+
+
 
         #################################################################################################################################   
 

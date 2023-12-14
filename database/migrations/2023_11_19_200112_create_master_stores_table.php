@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('master_stores', function (Blueprint $table) {
             $table->id();
-            // master of items belongs to a distrubtor store 
+            // master of items belongs to a distrubtor store , it have to get from PO
             $table->integer('store_id')->unsigned();
             $table->integer('sub_category_id')->unsigned();
-            $table->integer('product_secure_type_id')->unsigned(); //(login - serial number - filed)
+            $table->integer('product_secure_type_id')->unsigned(); //(login - serial number - field)
 
             $table->integer('item_id');
             $table->string('item_code');
