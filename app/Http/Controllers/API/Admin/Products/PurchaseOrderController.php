@@ -13,11 +13,15 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderDetail;
 use App\Models\Store;
 use App\Models\MasterStore;
+use App\Models\StoreItem;
 
 use App\Http\Requests\Admins\PurchaseOrders\StorePurchaseOrderRequest;
 
 use App\Http\Resources\Admins\PurchaseOrders\PurchaseOrderResource;
 use App\Http\Resources\Admins\PurchaseOrders\PurchaseOrdersCollection;
+
+use App\Http\Resources\Admins\PurchaseOrders\PurchaseOrderDetailResource;
+use App\Http\Resources\Admins\PurchaseOrders\PurchaseOrderDetailsCollection;
 
 class PurchaseOrderController extends ApiController
 {
@@ -160,18 +164,19 @@ class PurchaseOrderController extends ApiController
 					return $this->errorStatus((__('msg.POwithoutItems'))); 
 				}
 
-				$store = Store::where('owner_id',$purchaseOrder->distributor_id)->first();
+				// $store = Store::where('owner_id',$purchaseOrder->distributor_id)->first();
 
-				if(!$store)
-				{
-					return $this->errorStatus((__('msg.storeNotFound'))); 
-				}
+				// if(!$store)
+				// {
+				// 	return $this->errorStatus((__('msg.storeNotFound'))); 
+				// }
 
 				foreach ($purchaseOrderDetails as $purchaseOrderDetail ) {
 
 					$item = MasterFile::find($purchaseOrderDetail->item_id);
-					MasterStore::create([
-						'store_id'=> $store->id,
+					$masterStore=MasterStore::create([
+						'store_id'=>getStoreID($purchaseOrder->distributor_id),
+						'distributor_id'=>$purchaseOrder->distributor_id,
 						'sub_category_id' => $item->sub_category_id,
 						'product_secure_type_id' => $purchaseOrderDetail->product_secure_type_id,
 						'item_id' => $purchaseOrderDetail->item_id,
@@ -183,6 +188,15 @@ class PurchaseOrderController extends ApiController
 						'createdBy_id'=>auth()->user()->id
 
 					]);
+					//fetch QTY into store items to be able added the secure type per every item later and show the movements of product(Tracking) 
+					//dd($masterStore->QTY );
+					for($i = 0 ; $i < $masterStore->QTY ;$i++)
+					{
+						StoreItem::create([
+							'master_store_id'=> $masterStore->id,
+							'PO_id' => $purchaseOrder->id,
+						]);
+					}
 					
 				}
 				
@@ -196,5 +210,32 @@ class PurchaseOrderController extends ApiController
 		}
 
     }
+
+
+
+	public function myPurchaseOrderDetails($po)
+	{
+		$purchaseOrderDetails = PurchaseOrderDetail::where('PO_id',$po)->paginate(20);
+
+		if(!$purchaseOrderDetails->count() > 0)
+        {
+			return $this->errorNotFound();
+        }
+
+		return new PurchaseOrderDetailsCollection($purchaseOrderDetails);
+	}
+
+	public function showMyPurchaseOrderDetail($po,$id)
+	{
+		$purchaseOrderDetail = PurchaseOrderDetail::where('PO_id',$po)->whereId($id)->first();
+		
+		if (!$purchaseOrderDetail) {
+            return $this->errorNotFound();
+        }
+
+		return $this->respondWithItem(new PurchaseOrderDetailResource($purchaseOrderDetail));
+
+	}
+
     
 }

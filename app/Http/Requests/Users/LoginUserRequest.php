@@ -11,7 +11,9 @@ class LoginUserRequest extends APIRequest
     {
         return [
         'username' => 'required|string|exists:users,username',
-        'password'=>'required|string'
+        'password'=>'required|string',
+        'new_password'=>'nullable|string'
+
         ];
     }
 }

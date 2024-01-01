@@ -36,6 +36,16 @@ class AuthDistributorController extends ApiController
             return $this->errorStatus(__('msg.wrongCreds'));
         }
 
+        if(Hash::check('1234', $user->password) && $request->input('new_password'))
+        {
+            $user->update(['password'=>$request->new_password]);
+            return $this->respondWithMessage(__('msg.changePassword'));
+        }
+
+        if (Hash::check('1234', $user->password)) {
+            return $this->errorStatus(__('msg.plsUpdateTheInitialPassword'));
+        }
+
         if (!Hash::check($request->password, $user->password)) {
             return $this->errorStatus(__('msg.wrongCreds'));
 

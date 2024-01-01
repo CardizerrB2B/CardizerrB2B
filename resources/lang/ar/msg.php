@@ -59,7 +59,9 @@ return [
     'CouponNotFound'=>"كود غير موجود",
 
     'deleted' => 'تم حذف السجل',
-    'theRecordAlreadyDeleted'=>'لقد تم حذف السجل بالفعل'
+    'theRecordAlreadyDeleted'=>'لقد تم حذف السجل بالفعل',
+    'plsUpdateTheInitialPassword'=>'يرجى تحديث كلمة المرور الأولية الخاصة بك ثم حاول مرة أخرى'
+
 
 ];
 

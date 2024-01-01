@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('PO_id');
             $table->unsignedBigInteger('item_id');
             $table->string('item_code');
-            $table->integer('product_secure_type_id')->unsigned(); //(login - serial number - filed)
+            $table->unsignedBigInteger('product_secure_type_id'); //(login - serial number - filed)
 
 
             $table->integer('QTY')->default(1);
@@ -26,6 +26,8 @@ return new class extends Migration
        
             $table->foreign('PO_id')->references('id')->on('purchase_orders');
             $table->foreign('item_id')->references('id')->on('master_files');
+            $table->foreign('product_secure_type_id')->references('id')->on('product_secure_types');
+
             $table->timestamps();
         });
     }

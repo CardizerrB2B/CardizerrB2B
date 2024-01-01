@@ -88,7 +88,8 @@ return [
     'CouponNotFound'=>"Coupon Not Found",
 
     'deleted' => 'the record has been deleted',
-    'theRecordAlreadyDeleted'=>'The record has been already deleted'
+    'theRecordAlreadyDeleted'=>'The record has been already deleted',
+    'plsUpdateTheInitialPassword'=>'Please update your initial password then try again'
 
    ];
 

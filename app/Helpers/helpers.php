@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Store;
+
 
 if (! function_exists('upload')) {
     function upload($file, $path)
@@ -44,5 +46,14 @@ if (!function_exists('updateMedia')) {
 
             ]
         );
+    }
+}
+
+
+if(!function_exists('getStoreID')){
+
+    function getStoreID ($owner_id)
+    {
+        return Store::where('owner_id',$owner_id)->first()->id;
     }
 }

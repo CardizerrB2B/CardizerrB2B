@@ -78,6 +78,7 @@ class DistributorController extends ApiController
                         "email"=> $request->email,
                         "fullname"=> $request->fullname,
                         'user_type'=>'Distributor',
+                        'password'=>1234,//defualt password and it should be changed in the first login process 
                         "createdBy_id"=> auth()->user()->id,
         
                     ]);

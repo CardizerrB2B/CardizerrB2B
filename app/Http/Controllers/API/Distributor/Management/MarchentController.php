@@ -69,6 +69,7 @@ class MarchentController extends ApiController
                 "email"=> $request->email,
                 "fullname"=> $request->fullname,
                 'user_type'=>'Marchent',
+                'password'=>1234,//defualt password and it should be changed in the first login process 
                 "createdBy_id"=> auth()->user()->id,
                 "distributor_id"=> auth()->user()->id,
 

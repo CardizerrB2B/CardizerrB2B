@@ -14,7 +14,11 @@ class MasterStore extends Model
     protected $dates = ['deleted_at'];
 
 
-    protected $fillable = ['store_id','sub_category_id','product_secure_type_id','item_id','item_code','description','QTY','last_cost','AVG_cost','stock_cost','retail_price','createdBy_id','lastEditBy_id'];
+    protected $fillable = ['store_id','distributor_id','sub_category_id','product_secure_type_id','item_id','item_code','description','QTY','last_cost','AVG_cost','stock_cost','retail_price','createdBy_id','lastEditBy_id'];
 
+    public function subCategory()
+    {
+        $this->hasOne(SubCategory::class,'id','sub_category_id');
+    }
 
 }
