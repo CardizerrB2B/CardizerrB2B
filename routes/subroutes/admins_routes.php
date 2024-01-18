@@ -98,8 +98,36 @@ Route::prefix('admins')->group(function () {
           Route::get('products/masterStore/details/all/{product_id}','Products\MasterStoreController@getProductDetails');
           Route::get('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@showProductDetail');
 
-        #################################################################################################################################   
+        #################################################################################################################################  
 
+          Route::group(['namespace'=>'Wallet'], function(){
+            // with user  auth
+            Route::group(['middleware' => ['auth:admin']], function () {
+
+               //paymentAccounts
+                Route::get('wallets/payments/accounts/all','PaymentAccountController@index');
+                Route::get('wallets/payments/accounts/{id}','PaymentAccountController@show');
+
+                //payments transactions
+                Route::get('wallets/payments/transactions/all', 'PaymentTransactionController@allPaymentsTransactions');
+                Route::post('wallets/payments/transactions/search', 'PaymentTransactionController@searchPaymentTransactions');
+                Route::post('wallets/payments/transactions/verify/{id}', 'PaymentTransactionController@verifyPaymentTransaction');
+                Route::get('wallets/payments/transactions/{id}', 'PaymentTransactionController@showPaymentTransaction');
+              
+                //wallets
+                Route::get('wallets/myAccount','WalletAccountController@show');
+                Route::post('wallets/paymentAccounts/verify','WalletAccountController@verifyAccount');
+    
+    
+                //wallets transactions
+                Route::post('wallets/transactions/make','WalletAccountController@makeWalletTransaction');
+                Route::get('wallets/transactions/all', 'WalletTransactionController@getWalletTransactions');
+                Route::post('wallets/transactions/search', 'WalletTransactionController@searchWalletTransactions');
+                Route::get('wallets/transactions/{id}', 'WalletTransactionController@showWalletTransaction');
+    
+    
+               });
+            });
   
         });
 

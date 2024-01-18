@@ -42,6 +42,18 @@ class User extends Authenticatable
     }
     #############################################
 
+
+    public function paymentAccount()
+    {
+        return $this->hasOne(PaymentAccount::class,'user_id','id');
+    }
+
+    public function walletAccount()
+    {
+        return $this->hasOne(WalletDetail::class,'user_id','id');
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -62,5 +74,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    
 
 }
