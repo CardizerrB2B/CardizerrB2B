@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('amount');
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('apporvedby_id')->references('id')->on('users');
+            $table->foreign('apporvedRejectedby_id')->references('id')->on('users');
             $table->foreign('payment_account_id')->references('id')->on('payment_accounts');
 
             $table->timestamps();
