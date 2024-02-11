@@ -14,6 +14,7 @@ use App\Http\Requests\Users\ChangePasswordRequest;
 
 use App\Http\Resources\Members\UserMemberResource ;
 use App\Http\Resources\Members\UserProfileResource ;
+use App\Http\Resources\Members\KeyOfFaGeneratedResource;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -68,7 +69,16 @@ class AuthAdminController extends ApiController
 
     }
 
+    public function googleTwofaGenerate()
+    {
+        $google2fa = app('pragmarx.google2fa');
 
+        $user = User::find(auth()->user()->id);
+        $user->update(['google2fa_secret'=> $google2fa->generateSecretKey()]);
+
+        return $this->sendResponse(new KeyOfFaGeneratedResource($user), __('msg.KeyGenerated'));
+
+    }
 
 
     public function update(UpdateUserRequest $request)

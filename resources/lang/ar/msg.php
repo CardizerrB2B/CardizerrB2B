@@ -60,8 +60,13 @@ return [
 
     'deleted' => 'تم حذف السجل',
     'theRecordAlreadyDeleted'=>'لقد تم حذف السجل بالفعل',
-    'plsUpdateTheInitialPassword'=>'يرجى تحديث كلمة المرور الأولية الخاصة بك ثم حاول مرة أخرى'
+    'plsUpdateTheInitialPassword'=>'يرجى تحديث كلمة المرور الأولية الخاصة بك ثم حاول مرة أخرى',
 
+    'KeyGenerated'=>"تم إنشاء المفتاح السري لـ Google 2fa لحسابك",
+    'Invalid2faCode'=>"رمز 2FA غير صالح. يرجى المحاولة مرة أخرى لإدخال الرمز الذي تم إنشاؤه في تطبيق Authenticator الخاص بك. تأكد من إرسال الرمز الحالي لأنه يتم تحديثه كل 30 ثانية",
+
+    'the2FaCodeRequired'=>"الرمز السري 2FA مطلوب للمتابعة",
+    'generateKeyRequired'=>"يجب عليك إنشاء مفتاح 2FA للمتابعة",
 
 ];
 

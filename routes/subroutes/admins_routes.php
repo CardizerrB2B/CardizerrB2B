@@ -10,13 +10,28 @@ Route::prefix('admins')->group(function () {
         Route::post('register', 'AuthAdminController@register');
         Route::post('login', 'AuthAdminController@login');
 
+
+        // with Admin auth and google 2fa
+        Route::group(['middleware'=>['auth:admin','2fa.api']],function(){
+            Route::put('update', 'AuthAdminController@update');
+
+            //Route::post('google2fa/otp', 'AuthAdminController@validateGoogle2FA');
+
+
+        });
+
         // with admin  auth
         Route::group(['middleware' => ['auth:admin']], function () {
             //admins
-            Route::put('update', 'AuthAdminController@update');
+           // Route::put('update', 'AuthAdminController@update');
             Route::post('logout', 'AuthAdminController@logout');
             Route::put('changePassword' , 'AuthAdminController@chnagePassword');
             Route::get('get/myProfile','AuthAdminController@showMyProfile');
+
+
+            // Google 2fa
+            Route::get('google2fa/generateKey', 'AuthAdminController@googleTwofaGenerate');
+
           #############################################################################################################
             
             // Management distributors

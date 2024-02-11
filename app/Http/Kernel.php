@@ -47,6 +47,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
         ],
+        '2fa.api' => [\App\Http\Middleware\VerifyTwoFactorAPI::class,]
     ];
 
     /**

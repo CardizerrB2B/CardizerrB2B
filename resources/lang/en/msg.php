@@ -89,7 +89,13 @@ return [
 
     'deleted' => 'the record has been deleted',
     'theRecordAlreadyDeleted'=>'The record has been already deleted',
-    'plsUpdateTheInitialPassword'=>'Please update your initial password then try again'
+    'plsUpdateTheInitialPassword'=>'Please update your initial password then try again',
+
+    'KeyGenerated'=>"The secret key of Google 2fa is generated for your account",
+    'Invalid2faCode'=>"Invalid 2FA code.Please try again to enter the generated on your Authenticator App.Ensure you submit the current one because it refreshes every 30 seconds",
+
+    'the2FaCodeRequired'=>"The 2FA code is required to process",
+    'generateKeyRequired'=>"The secret key of Google 2fa is required to process, please generate it first",
 
    ];
 

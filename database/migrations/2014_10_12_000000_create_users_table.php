@@ -24,7 +24,9 @@ return new class extends Migration
 
             $table->integer('createdBy_id')->unsigned()->nullable();
             $table->integer('distributor_id')->unsigned()->nullable(); // if the user type is Marchent
-
+            
+            $table->text('google2fa_secret')->nullable();
+            $table->boolean('google2fa_enabled')->default(0); // Disable 2FA by default until verified
 
             $table->timestamp('email_verified_at')->nullable();
         

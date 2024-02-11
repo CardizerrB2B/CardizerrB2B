@@ -16,7 +16,8 @@ class UpdateUserRequest extends APIRequest
             'current_password' => 'required|min:5',
             'mobile_number' => ['nullable','string', Rule::unique('users')->ignore($id)],
             'email' => ['nullable','string','email','max:50', Rule::unique('users')->ignore($id)],
-            'fullname' => 'nullable|string'
+            'fullname' => 'nullable|string',
+            '2fa_code'=>'nullable|integer'
             
         ];
     }

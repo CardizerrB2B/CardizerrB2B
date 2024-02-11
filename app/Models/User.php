@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -30,9 +30,20 @@ class User extends Authenticatable
         'fullname',
         'user_type',
         'createdBy_id',
-        'distributor_id'
+        'distributor_id',
+        'google2fa_secret',
+        'google2fa_enabled',
     ];
 
+
+    // protected function google2faSecret(): Attribute
+    // {
+       
+    //     return new Attribute(
+    //         get: fn ($value) =>  decrypt($value),
+    //         set: fn ($value) =>  encrypt($value),
+    //     );
+    // }
 
     ##### distributor section ###################
 
