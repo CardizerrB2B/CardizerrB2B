@@ -54,11 +54,28 @@ Route::prefix('common')->group(function(){
                  Route::get('wallets/transactions/all', 'WalletTransactionController@getWalletTransactions');
                  Route::post('wallets/transactions/search', 'WalletTransactionController@searchWalletTransactions');
                  Route::get('wallets/transactions/{id}', 'WalletTransactionController@showWalletTransaction');
-     
+
      
              });
         });
            
+
+        Route::group(['namespace'=>'Chat'], function(){
+            // with user  auth
+            Route::group(['middleware' => ['auth:distributor','auth:marchent']], function () {
+
+                //chats
+
+                Route::get('chats/getChats','ChatController@getChats');
+                Route::post('chats/createChat','ChatController@createChat');
+                Route::post('chats/searchUsers','ChatController@searchUsers');
+                Route::get('chats/{chat}','ChatController@getChatById');
+                Route::post('chats/messages/send','ChatController@sendTextMessage');
+                Route::get('chats/messages/{message}','ChatController@messageStatus');
+    
+    
+            });
+       });
     
  
 
