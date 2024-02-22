@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\ChatMessages;
 use App\Http\Resources\Common\Chat\MessageResource;
 
-class ChatMessageStatus
+class ChatMessageStatus implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

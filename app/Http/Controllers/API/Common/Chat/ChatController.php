@@ -65,11 +65,11 @@ class ChatController extends ApiController
                 'data' => json_encode(['seenBy'=>[],'status'=>'sent']) //status = sent, delivered,seen
             ]);
  
-
+            $message =new MessageResource($message);
 
             // broadcast the message to all users 
             //dd(broadcast(new ChatMessageSent($message)));
-            //broadcast(new ChatMessageSent($message));
+            broadcast(new ChatMessageSent($message));
             
 
             // foreach($chat->participants as $participant){
@@ -77,7 +77,7 @@ class ChatController extends ApiController
             //         $participant->notify(new NewMessage($message));
             //     }
             // }
-            return $this->respondWithItem(new MessageResource($message) );
+            return $this->respondWithItem($message);
 
    
         }else{
@@ -101,7 +101,7 @@ class ChatController extends ApiController
             $message->save();
 
             //triggering the event
-           // broadcast(new ChatMessageStatus($message));
+           broadcast(new ChatMessageStatus($message));
 
            return $this->respondWithItem(new MessageResource($message) );
 
