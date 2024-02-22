@@ -33,11 +33,22 @@ class AuthChargerController extends ApiController
 
     public function login(LoginUserRequest $request)
     {
-        $user = User::whereIn('user_type',['SA','Admin'])
+        
+        $user = User::where('user_type','Charger')
                     ->where('username', $request->username)->first();
   
         if (empty($user)) {
             return $this->errorStatus(__('msg.wrongCreds'));
+        }
+
+        if(Hash::check('1234', $user->password) && $request->input('new_password'))
+        {
+            $user->update(['password'=>$request->new_password]);
+            return $this->respondWithMessage(__('msg.changePassword'));
+        }
+
+        if (Hash::check('1234', $user->password)) {
+            return $this->errorStatus(__('msg.plsUpdateTheInitialPassword'));
         }
 
         if (!Hash::check($request->password, $user->password)) {
@@ -46,10 +57,10 @@ class AuthChargerController extends ApiController
         }
    
 
-        if (!auth()->guard('admin')->setUser($user)) {
+        if (!auth()->guard('charger')->setUser($user)) {
             return $this->errorStatus(__('msg.Unauthorized'));
         }
-        $user = auth('admin')->user();
+        $user = auth('charger')->user();
 
         return $this->sendResponse(new UserMemberResource($user), __('msg.Login'));
 
