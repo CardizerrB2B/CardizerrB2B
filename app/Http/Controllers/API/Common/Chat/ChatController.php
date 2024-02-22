@@ -37,7 +37,9 @@ class ChatController extends ApiController
     }
 
     public function createChat(CreateChatRequest $request){//The chat here will be between 2 users
-        $users = $request->users;
+       /// dd($request->users);
+        $users = [$request->user_id];
+          // dd($users);
         // check if they had a chat before
        $chat =  $request->user()->chats()->whereHas('participants',function($q) use($users){// authenticated user should be one of the participants of the chat and has relation with participants tbale in the database
             $q->where('user_id', $users[0]);//the other user and we use one eleemnt of the array as we are creating a chat between 2 users
