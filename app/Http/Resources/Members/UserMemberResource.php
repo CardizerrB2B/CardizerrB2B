@@ -29,6 +29,7 @@ class UserMemberResource extends JsonResource
             'email'=>$this->email,
             'fullname'=>$this->fullname,
             'user_type' => $this->user_type,
+            'img'=>'the path',
 
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,

@@ -11,7 +11,7 @@ class UpdateCategoryRequest extends APIRequest
     {
         return [
             'current_password'=>'required|string',
-            'name'=>'required|string',
+            'name'=>'required|string|unique:categories,name,'.$this->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
 
         ];

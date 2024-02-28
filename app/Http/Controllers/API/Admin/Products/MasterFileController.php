@@ -31,6 +31,11 @@ class MasterFileController extends ApiController
     public function search(SearchRequest $request)
     {
         $key = $request->key;
+    //     $product = MasterFile::find(1) ;
+    //    // dd($product);
+    //     $product->subCategory;
+    //     dd($product->subCategory);
+
         $products = MasterFile::when($key,function($q) use($key){
                               $q->where(function($q) use($key){
                                     $q->where('id','like','%'.$key.'%')

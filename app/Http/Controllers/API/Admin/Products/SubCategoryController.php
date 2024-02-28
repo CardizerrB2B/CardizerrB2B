@@ -32,7 +32,8 @@ class SubCategoryController extends ApiController
 
         $subCategories = SubCategory::when($key , function($q) use($key) {
                                     $q->where('name','like','%'.$key.'%');
-                                  })->get();
+                                  })->paginate(20);
+
 
         return new SubCategoryCollection($subCategories);
 

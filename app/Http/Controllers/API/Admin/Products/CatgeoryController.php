@@ -21,7 +21,7 @@ class CatgeoryController extends ApiController
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withTrashed()->get();
 
         return new CategoryCollection($categories);
     }
@@ -30,9 +30,9 @@ class CatgeoryController extends ApiController
     {
         $key = $request->key;
 
-        $categories = Category::when($key , function($q) use($key) {
+        $categories = Category::withTrashed()->when($key , function($q) use($key) {
                                     $q->where('name','like','%'.$key.'%');
-                                  })->get();
+                                  })->paginate(20);
 
         return new CategoryCollection($categories);
 

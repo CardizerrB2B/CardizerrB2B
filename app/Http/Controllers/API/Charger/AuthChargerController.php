@@ -106,11 +106,11 @@ class AuthChargerController extends ApiController
 
     public function logout()
     {
-        if (!auth('api')->check()) {
+        if (!auth('charger')->check()) {
             return  $this->errorUnauthenticated();
         }
 
-        auth('api')->user()->token()->revoke();
+        auth('charger')->user()->token()->revoke();
 
         return $this->respondWithMessage(__('msg.logout'));
     }

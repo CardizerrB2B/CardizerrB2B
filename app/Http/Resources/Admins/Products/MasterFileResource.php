@@ -17,6 +17,7 @@ class MasterFileResource extends JsonResource
         return [
             'id'=>$this->id,
             'sub_category_id'=>$this->sub_category_id,
+            'sub_category_name'=>$this->subCategory->name??'',
             'item_code'=>$this->item_code,
             'description'=>$this->description,
             'retail_price'=>$this->retail_price,
