@@ -21,7 +21,14 @@ class SubCategoryController extends ApiController
 {
     public function index()
     {
-        $subCategories = SubCategory::all();
+        $subCategories = SubCategory::withTrashed()->get();
+
+        return new SubCategoryCollection($subCategories);
+    }
+
+    public function getByCategoryID($category_id)
+    {
+        $subCategories = SubCategory::withTrashed()->where('category_id',$category_id)->paginate(20);
 
         return new SubCategoryCollection($subCategories);
     }
@@ -30,7 +37,7 @@ class SubCategoryController extends ApiController
     {
         $key = $request->key;
 
-        $subCategories = SubCategory::when($key , function($q) use($key) {
+        $subCategories = SubCategory::withTrashed()->when($key , function($q) use($key) {
                                     $q->where('name','like','%'.$key.'%');
                                   })->paginate(20);
 

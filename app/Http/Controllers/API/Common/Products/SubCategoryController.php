@@ -21,6 +21,12 @@ class SubCategoryController extends ApiController
 
         return new SubCategoryCollection($subCategories);
     }
+    public function getByCategoryID($category_id)
+    {
+        $subCategories = SubCategory::where('category_id',$category_id)->paginate(20);
+
+        return new SubCategoryCollection($subCategories);
+    }
 
     public function search(SearchRequest $request)
     {

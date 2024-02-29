@@ -13,6 +13,8 @@ Route::prefix('common')->group(function(){
 
           //sub-categories
           Route::get('products/subCategories/all','Products\SubCategoryController@index');
+          Route::get('products/subCategories/byCategory/{category_id}','Products\SubCategoryController@getByCategoryID');
+
           Route::post('products/subCategories/search','Products\SubCategoryController@search');
           Route::get('products/subCategories/{id}','Products\SubCategoryController@show');
 

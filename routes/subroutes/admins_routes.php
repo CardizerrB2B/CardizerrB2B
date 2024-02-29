@@ -64,6 +64,7 @@ Route::prefix('admins')->group(function () {
 
           //sub-categories
           Route::get('products/subCategories/all','Products\SubCategoryController@index');
+          Route::get('products/subCategories/byCategory/{category_id}','Products\SubCategoryController@getByCategoryID');
           Route::post('products/subCategories/search','Products\SubCategoryController@search');
           Route::post('products/subCategories/store','Products\SubCategoryController@store');
           Route::put('products/subCategories/update/{id}','Products\SubCategoryController@update');
