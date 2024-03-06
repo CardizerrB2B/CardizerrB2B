@@ -67,6 +67,10 @@ return [
 
     'the2FaCodeRequired'=>"الرمز السري 2FA مطلوب للمتابعة",
     'generateKeyRequired'=>"يجب عليك إنشاء مفتاح 2FA للمتابعة",
+    'InvitationGenerated'=>"تم إنشاء الدعوة بنجاح",
+    'validInvitationToken'=>"رمز الدعوة صالح",
+    'invalidInvitationToken'=>"رمز الدعوة غير صالح",
+    'expiredinvitationToken'=>"انتهت صلاحية رمز الدعوة",
 
 ];
 

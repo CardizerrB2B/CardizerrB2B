@@ -26,6 +26,9 @@ Route::prefix('distributors')->group(function () {
             Route::put('marchents/updateAccount/{id}', 'Management\MarchentController@updateAccount');
             Route::post('marchents/delete/{id}', 'Management\MarchentController@destroy');
 
+            // Management marchents invitations
+            Route::get('marchents/invitations/store', 'Management\InvitationController@storeInvitation');  
+
          ############################Products Settings#####################################################
 
           //masterStore products

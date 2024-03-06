@@ -96,6 +96,10 @@ return [
 
     'the2FaCodeRequired'=>"The 2FA code is required to process",
     'generateKeyRequired'=>"The secret key of Google 2fa is required to process, please generate it first",
+    'InvitationGenerated'=>"Invitation generated successfully",
+    'validInvitationToken'=>"Valid invitation token",
+    'invalidInvitationToken'=>"Invalid invitation token",
+    'expiredinvitationToken'=>"Invitation token expired",
 
    ];
 

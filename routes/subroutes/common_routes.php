@@ -31,6 +31,8 @@ Route::prefix('common')->group(function(){
           Route::get('products/stores/{id}','Products\StoreController@show');
 
 
+
+
          
         Route::group(['namespace'=>'Wallet'], function(){
              // with user  auth
@@ -83,5 +85,12 @@ Route::prefix('common')->group(function(){
 
     });
 
+    Route::group(['namespace'=>'API\Distributor'],function(){
+
+        //distributors
+          // marchents invitations
+            Route::post('marchents/invitations/check', 'Management\InvitationController@checkInvitation');
+            Route::post('marchents/invitations/use', 'Management\InvitationController@useInvitation');
+        });
 });
 

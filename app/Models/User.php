@@ -34,6 +34,7 @@ class User extends Authenticatable
         'distributor_id',
         'google2fa_secret',
         'google2fa_enabled',
+        'invitation_id',
     ];
 
 
