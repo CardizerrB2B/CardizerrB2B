@@ -70,8 +70,7 @@ class ChatController extends ApiController
             $message =new MessageResource($message);
 
             // broadcast the message to all users 
-            //dd(broadcast(new ChatMessageSent($message)));
-            broadcast(new ChatMessageSent($message));
+            //broadcast(new ChatMessageSent($message));// it will be availabe while changing the shared hosting to VPS
             
 
             // foreach($chat->participants as $participant){
@@ -103,7 +102,7 @@ class ChatController extends ApiController
             $message->save();
 
             //triggering the event
-           broadcast(new ChatMessageStatus($message));
+          // broadcast(new ChatMessageStatus($message));it will be availabe while changing the shared hosting to VPS
 
            return $this->respondWithItem(new MessageResource($message) );
 
@@ -116,7 +115,7 @@ class ChatController extends ApiController
 
 
     public function searchUsers(Request $request){
-        $users = User::where('email','like',"%{$request->email}%")->limit(3)->get();
+        $users = User::where('user_type',$request->user_type)->where('email','like',"%{$request->email}%")->limit(3)->get();
         return response()->json( [
             'users'=> $users ,
         ],200);
