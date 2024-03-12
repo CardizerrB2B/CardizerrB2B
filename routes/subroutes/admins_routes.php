@@ -111,7 +111,8 @@ Route::prefix('admins')->group(function () {
           Route::post('products/masterStore/{store_id}/search','Products\MasterStoreController@search');
           Route::get('products/masterStore/{id}','Products\MasterStoreController@show');
 
-          Route::get('products/masterStore/details/all/{product_id}','Products\MasterStoreController@getProductDetails');
+          Route::post('products/masterStore/details/all/{product_id}','Products\MasterStoreController@getProductDetails');
+          Route::put('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@setSecureTypeValue');
           Route::get('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@showProductDetail');
 
         #################################################################################################################################  

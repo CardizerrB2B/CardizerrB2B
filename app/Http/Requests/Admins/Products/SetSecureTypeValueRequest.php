@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Chargers\Products;
+namespace App\Http\Requests\Admins\Products;
 
 use App\Http\Requests\APIRequest;
 
-class UpdateProductDetailRequest extends APIRequest
+class SetSecureTypeValueRequest extends APIRequest
 {
  
     public function rules(): array

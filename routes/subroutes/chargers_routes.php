@@ -22,13 +22,14 @@ Route::prefix('chargers')->group(function () {
   
             
           //masterStore products
-          Route::get('products/masterStore/{store_id}/all','Products\MasterStoreController@index');
-          Route::post('products/masterStore/{store_id}/search','Products\MasterStoreController@search');
-          Route::get('products/masterStore/{id}','Products\MasterStoreController@show');
+          //it's replaced from charger role to admin role as the last update of project due to the new requirements
+        //   Route::get('products/masterStore/{store_id}/all','Products\MasterStoreController@index');
+        //   Route::post('products/masterStore/{store_id}/search','Products\MasterStoreController@search');
+        //   Route::get('products/masterStore/{id}','Products\MasterStoreController@show');
 
-          Route::post('products/masterStore/details/all/{product_id}','Products\MasterStoreController@getProductDetails');
-          Route::put('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@updateProductDetail');
-          Route::get('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@showProductDetail');
+        //   Route::post('products/masterStore/details/all/{product_id}','Products\MasterStoreController@getProductDetails');
+        //   Route::put('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@updateProductDetail');
+        //   Route::get('products/masterStore/details/{product_id}/{id}','Products\MasterStoreController@showProductDetail');
 
 
         });

@@ -8,12 +8,20 @@ use App\Models\MasterStore;
 use App\Models\StoreItem;
 
 use App\Http\Requests\Admins\Products\SearchRequest;
+use App\Http\Requests\Admins\Products\SetSecureTypeValueRequest;
+use App\Http\Requests\Admins\Products\FilterProductDetailsRequest;
+
 
 use App\Http\Resources\Admins\Products\MasterStoreCollection;
 use App\Http\Resources\Admins\Products\MasterStoreResource;
 
 use App\Http\Resources\Admins\Products\ProductDetailResource;
 use App\Http\Resources\Admins\Products\ProductDetailsCollection;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+use Carbon\Carbon;
 
 
 class MasterStoreController extends ApiController
@@ -64,15 +72,25 @@ class MasterStoreController extends ApiController
 
     }
 
-    public function getProductDetails($product_id)
+    public function getProductDetails($product_id,FilterProductDetailsRequest $request)
     {
-        $productDetails = StoreItem::where('master_store_id',$product_id)->paginate(20);
+        $productDetails = StoreItem::where('master_store_id',$product_id);
+
+        if($request->input('status') == 'charged')
+        {
+            $productDetails->where('isCharger',1);
+        }
+
+        if($request->input('status') == 'non-charged')
+        {
+            $productDetails->where('isCharger',0);
+        }
 
         if(!$productDetails->count() > 0)
         {
 			return $this->errorNotFound();
         }
-        return new ProductDetailsCollection($productDetails);
+        return new ProductDetailsCollection($productDetails->paginate(20));
 
     }
 
@@ -84,6 +102,33 @@ class MasterStoreController extends ApiController
                 }
         return $this->respondWithItem(new ProductDetailResource($productDetail) ); 
     }
+
+    
+    public function SetSecureTypeValue($product_id,$id,SetSecureTypeValueRequest $request)
+    {
+        if (!Hash::check($request->current_password, Auth::user()->password)) {
+            return $this->errorStatus(__('msg.checkPassword'));
+
+        }else{
+            $productDetail = StoreItem::where('master_store_id',$product_id)->whereId($id)->first();
+            if (empty($productDetail)) {
+                        return $this->errorStatus(__('msg.errorNotFound'));
+                    }
+            $productDetail->update([
+                'product_secure_type_value'=>$request->product_secure_type_value,
+                'isCharger'=>1,
+                'charger_date'=>Carbon::now(),
+                'charger_id'=>Auth::user()->id //it's replaced from charger role to admin role as the last update of project due to the new requirements
+            ]);
+
+
+            return $this->respondWithItem(new ProductDetailResource($productDetail) ); 
+
+        }
+
+
+    }
+
 
 
 
