@@ -100,6 +100,8 @@ return [
     'validInvitationToken'=>"Valid invitation token",
     'invalidInvitationToken'=>"Invalid invitation token",
     'expiredinvitationToken'=>"Invitation token expired",
+    'InvitationsNotFound'=>"Invitations not found",
+    'InvitationsRetrieved'=>"Invitations retrieved successfully",
 
    ];
 

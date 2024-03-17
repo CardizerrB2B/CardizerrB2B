@@ -71,6 +71,8 @@ return [
     'validInvitationToken'=>"رمز الدعوة صالح",
     'invalidInvitationToken'=>"رمز الدعوة غير صالح",
     'expiredinvitationToken'=>"انتهت صلاحية رمز الدعوة",
+    'InvitationsNotFound'=>"لم يتم العثور على دعوات",
+    'InvitationsRetrieved'=>"تم استرجاع الدعوات بنجاح",
 
 ];
 

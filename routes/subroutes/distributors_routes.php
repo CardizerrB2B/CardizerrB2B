@@ -27,7 +27,9 @@ Route::prefix('distributors')->group(function () {
             Route::post('marchents/delete/{id}', 'Management\MarchentController@destroy');
 
             // Management marchents invitations
-            Route::get('marchents/invitations/store', 'Management\InvitationController@storeInvitation');  
+            Route::get('marchents/invitations/store', 'Management\InvitationController@storeInvitation'); 
+            Route::get('marchents/invitations/all', 'Management\InvitationController@index');
+            Route::get('marchents/invitations/{id}', 'Management\InvitationController@show');
 
          ############################Products Settings#####################################################
 

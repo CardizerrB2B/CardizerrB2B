@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API\Distributor\Management;
 
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
 use App\Models\Invitation;
 use App\Http\Resources\Distributors\Invitations\InvitationResource;
 use App\Models\User;
@@ -12,6 +11,25 @@ use App\Http\Requests\Distributors\Invitations\CheckInvitationRequest;
 
 class InvitationController extends ApiController
 {
+    public function index()
+    {
+        $invitations = Invitation::where('distributor_id', auth()->user()->id)->paginate(20);
+        if(!$invitations->count() > 0)
+        {
+            return $this->errorNotFound(__('msg.InvitationsNotFound'));
+        }
+        return $this->sendResponse(InvitationResource::collection($invitations), __('msg.InvitationsRetrieved'));
+    }
+
+    public function show($id)
+    {
+        $invitation = Invitation::where('distributor_id', auth()->user()->id)->find($id);
+        if (!$invitation) {
+            return $this->errorStatus(__('msg.InvitationNotFound'));
+        }
+        return $this->sendResponse(new InvitationResource($invitation), __('msg.InvitationRetrieved'));
+    }
+
     public function storeInvitation()
     {
         $invitation = new Invitation();
