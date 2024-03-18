@@ -7,15 +7,15 @@ Route::prefix('merchants')->group(function () {
     Route::group(['namespace' => 'API\Merchant'], function () {
         
         //merchants
-        Route::post('login', 'MerchantController@login');
+        Route::post('login', 'AuthMerchantController@login');
 
         // with Merchant  auth
         Route::group(['middleware' => ['auth:merchant']], function () {
             //merchants
-            Route::put('update', 'MerchantController@update');
-            Route::post('logout', 'MerchantController@logout');
-            Route::put('changePassword' , 'MerchantController@chnagePassword');
-            Route::get('get/myProfile','MerchantController@showMyProfile');
+            Route::put('update', 'AuthMerchantController@update');
+            Route::post('logout', 'AuthMerchantController@logout');
+            Route::put('changePassword' , 'AuthMerchantController@chnagePassword');
+            Route::get('get/myProfile','AuthMerchantController@showMyProfile');
 
 
         //masterStore products

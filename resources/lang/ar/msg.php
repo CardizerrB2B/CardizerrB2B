@@ -73,6 +73,7 @@ return [
     'expiredinvitationToken'=>"انتهت صلاحية رمز الدعوة",
     'InvitationsNotFound'=>"لم يتم العثور على دعوات",
     'InvitationsRetrieved'=>"تم استرجاع الدعوات بنجاح",
+    'InvitationNotFound '=>"لم يتم العثور على الدعوة",
 
 ];
 

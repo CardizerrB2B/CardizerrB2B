@@ -102,6 +102,7 @@ return [
     'expiredinvitationToken'=>"Invitation token expired",
     'InvitationsNotFound'=>"Invitations not found",
     'InvitationsRetrieved'=>"Invitations retrieved successfully",
+    'InvitationNotFound'=>"Invitation not found",
 
    ];
 
