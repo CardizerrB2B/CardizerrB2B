@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('fullname');
 
-            $table->enum('user_type', ['SA','Admin','Distributor','Marchent','Charger'])->default('Marchent');
+            $table->enum('user_type', ['SA','Admin','Distributor','Merchant','Charger'])->default('Merchant');
 
             $table->integer('createdBy_id')->unsigned()->nullable();
-            $table->integer('distributor_id')->unsigned()->nullable(); // if the user type is Marchent
-            $table->integer('invitation_id')->unsigned()->nullable(); // if the user type is Marchent
+            $table->integer('distributor_id')->unsigned()->nullable(); // if the user type is Merchant
+            $table->integer('invitation_id')->unsigned()->nullable(); // if the user type is Merchant
             
             $table->text('google2fa_secret')->nullable();
             $table->boolean('google2fa_enabled')->default(0); // Disable 2FA by default until verified

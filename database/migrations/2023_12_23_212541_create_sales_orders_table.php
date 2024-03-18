@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('distributor_id');
-            $table->unsignedBigInteger('marchent_id');
+            $table->unsignedBigInteger('merchant_id');
             $table->unsignedBigInteger('store_id');
 
 
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->boolean('finished')->default('0');
 
             $table->foreign('distributor_id')->references('id')->on('users');
-            $table->foreign('marchent_id')->references('id')->on('users');
+            $table->foreign('merchant_id')->references('id')->on('users');
             $table->foreign('store_id')->references('id')->on('stores');
 
             $table->timestamps();

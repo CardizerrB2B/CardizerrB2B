@@ -4,7 +4,7 @@ namespace App\Http\Requests\Distributors\Invitations;
 
 use App\Http\Requests\APIRequest;
 
-class CheckInvitationAndStoreNewMarchentRequest extends APIRequest
+class CheckInvitationAndStoreNewMerchantRequest extends APIRequest
 {
     
     public function rules(): array

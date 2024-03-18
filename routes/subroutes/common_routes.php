@@ -36,7 +36,7 @@ Route::prefix('common')->group(function(){
          
         Route::group(['namespace'=>'Wallet'], function(){
              // with user  auth
-             Route::group(['middleware' => ['auth:distributor','auth:marchent']], function () {
+             Route::group(['middleware' => ['auth:distributor','auth:merchant']], function () {
 
                 //paymentAccounts
                  Route::post('wallets/payments/accounts/store','PaymentAccountController@store');
@@ -66,7 +66,7 @@ Route::prefix('common')->group(function(){
 
         Route::group(['namespace'=>'Chat'], function(){
             // with user  auth
-            Route::group(['middleware' => ['auth:distributor','auth:marchent']], function () {
+            Route::group(['middleware' => ['auth:distributor','auth:merchant']], function () {
 
                 //chats
 
@@ -88,9 +88,9 @@ Route::prefix('common')->group(function(){
     Route::group(['namespace'=>'API\Distributor'],function(){
 
         //distributors
-          // marchents invitations
-            Route::post('marchents/invitations/check', 'Management\InvitationController@checkInvitation');
-            Route::post('marchents/invitations/use', 'Management\InvitationController@useInvitation');
+          // merchants invitations
+            Route::post('merchants/invitations/check', 'Management\InvitationController@checkInvitation');
+            Route::post('merchants/invitations/use', 'Management\InvitationController@useInvitation');
         });
 });
 

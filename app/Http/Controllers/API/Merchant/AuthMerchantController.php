@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Marchent;
+namespace App\Http\Controllers\API\Merchant;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
-class AuthMarchentController extends ApiController
+class AuthMerchantController extends ApiController
 {
 
     public function showMyProfile()
@@ -31,7 +31,7 @@ class AuthMarchentController extends ApiController
    
     public function login(LoginUserRequest $request)
     {
-        $user = User::where('user_type','marchent')
+        $user = User::where('user_type','merchant')
                     ->where('username', $request->username)->first();
   
         if (empty($user)) {
@@ -54,10 +54,10 @@ class AuthMarchentController extends ApiController
 
         }
         
-        if (!auth()->guard('marchent')->setUser($user)) {
+        if (!auth()->guard('merchant')->setUser($user)) {
             return $this->errorStatus(__('msg.Unauthorized'));
         }
-        $user = auth('marchent')->user();
+        $user = auth('merchant')->user();
 
         return $this->sendResponse(new UserMemberResource($user), __('msg.Login'));
 
@@ -103,11 +103,11 @@ class AuthMarchentController extends ApiController
 
     public function logout()
     {
-        if (!auth('marchent')->check()) {
+        if (!auth('merchant')->check()) {
             return  $this->errorUnauthenticated();
         }
 
-        auth('marchent')->user()->token()->revoke();
+        auth('merchant')->user()->token()->revoke();
 
         return $this->respondWithMessage(__('msg.logout'));
     }

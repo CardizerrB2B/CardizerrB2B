@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Marchents\Products;
+namespace App\Http\Resources\Merchants\Products;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -23,7 +23,7 @@ class ProductDetailResource extends JsonResource
             'isCharger'=>$this->isCharger,
             'charger_date'=>$this->charger_date,
             'sales_order_id'=>$this->sales_order_id,
-            'marchent_id'=>$this->marchent_id??'',
+            'merchant_id'=>$this->merchant_id??'',
             'isSold'=>$this->isSold,
             'sold_date'=>$this->sold_date??'',
 

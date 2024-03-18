@@ -9,6 +9,6 @@ class SalesOrder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['distributor_id','marchent_id','store_id','VAT','total','status','is_invoiced','is_credit','finished'];
+    protected $fillable = ['distributor_id','merchant_id','store_id','VAT','total','status','is_invoiced','is_credit','finished'];
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Marchent\Products;
+namespace App\Http\Controllers\API\Merchant\Products;
 
 use App\Http\Controllers\ApiController;
 use Exception;
@@ -14,18 +14,18 @@ use App\Models\Store;
 use App\Models\MasterStore;
 use App\Models\StoreItem;
 
-use App\Http\Requests\Marchents\SalesOrders\StoreSalesOrderRequest;
+use App\Http\Requests\Merchants\SalesOrders\StoreSalesOrderRequest;
 
-use App\Http\Resources\Marchents\SalesOrders\SalesOrderDetailResource;
-use App\Http\Resources\Marchents\SalesOrders\SalesOrderDetailsCollection;
-use App\Http\Resources\Marchents\SalesOrders\SalesOrderResource;
-use App\Http\Resources\Marchents\SalesOrders\SalesOrdersCollection;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrderDetailResource;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrderDetailsCollection;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrderResource;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrdersCollection;
 
 class SalesOrderController extends ApiController
 {
     public function getSalesOrders()
     {
-		$salesOrders = SalesOrder::where('marchent_id',auth()->user()->id)->paginate(20);
+		$salesOrders = SalesOrder::where('merchant_id',auth()->user()->id)->paginate(20);
 
 		if(!$salesOrders->count() > 0)
         {
@@ -62,7 +62,7 @@ class SalesOrderController extends ApiController
 
 			$salesOrder = SalesOrder::create([
 				'distributor_id' => $item->distributor_id,
-				'marchent_id' => Auth::id(),
+				'merchant_id' => Auth::id(),
 				'store_id' => $item->store_id,
 				'total' => $total,
 			]);
@@ -92,7 +92,7 @@ class SalesOrderController extends ApiController
 
 				$store_item->update([
 					'sales_order_id'=>$salesOrder->id,
-					'marchent_id'=>$salesOrder->marchent_id,
+					'merchant_id'=>$salesOrder->merchant_id,
 					'isSold'=>1,
 					'sold_date'=>now(),
 

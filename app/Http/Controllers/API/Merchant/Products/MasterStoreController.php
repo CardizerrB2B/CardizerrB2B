@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Marchent\Products;
+namespace App\Http\Controllers\API\Merchant\Products;
 
 use App\Http\Controllers\ApiController;
 
@@ -10,11 +10,11 @@ use App\Models\Store;
 
 use App\Http\Requests\Distributors\Products\SearchRequest;
 
-use App\Http\Resources\Marchents\Products\MasterStoreCollection;
-use App\Http\Resources\Marchents\Products\MasterStoreResource;
+use App\Http\Resources\Merchants\Products\MasterStoreCollection;
+use App\Http\Resources\Merchants\Products\MasterStoreResource;
 
-use App\Http\Resources\Marchents\Products\ProductDetailResource;
-use App\Http\Resources\Marchents\Products\ProductDetailsCollection;
+use App\Http\Resources\Merchants\Products\ProductDetailResource;
+use App\Http\Resources\Merchants\Products\ProductDetailsCollection;
 
 
 class MasterStoreController extends ApiController

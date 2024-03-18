@@ -3,19 +3,19 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('marchents')->group(function () {
-    Route::group(['namespace' => 'API\Marchent'], function () {
+Route::prefix('merchants')->group(function () {
+    Route::group(['namespace' => 'API\Merchant'], function () {
         
-        //marchents
-        Route::post('login', 'AuthMarchentController@login');
+        //merchants
+        Route::post('login', 'MerchantController@login');
 
-        // with marchent  auth
-        Route::group(['middleware' => ['auth:marchent']], function () {
-            //marchents
-            Route::put('update', 'AuthMarchentController@update');
-            Route::post('logout', 'AuthMarchentController@logout');
-            Route::put('changePassword' , 'AuthMarchentController@chnagePassword');
-            Route::get('get/myProfile','AuthMarchentController@showMyProfile');
+        // with Merchant  auth
+        Route::group(['middleware' => ['auth:merchant']], function () {
+            //merchants
+            Route::put('update', 'MerchantController@update');
+            Route::post('logout', 'MerchantController@logout');
+            Route::put('changePassword' , 'MerchantController@chnagePassword');
+            Route::get('get/myProfile','MerchantController@showMyProfile');
 
 
         //masterStore products

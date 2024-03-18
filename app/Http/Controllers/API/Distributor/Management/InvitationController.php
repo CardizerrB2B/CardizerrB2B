@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Invitation;
 use App\Http\Resources\Distributors\Invitations\InvitationResource;
 use App\Models\User;
-use App\Http\Requests\Distributors\Invitations\CheckInvitationAndStoreNewMarchentRequest;
+use App\Http\Requests\Distributors\Invitations\CheckInvitationAndStoreNewMerchantRequest;
 use App\Http\Requests\Distributors\Invitations\CheckInvitationRequest;
 
 class InvitationController extends ApiController
@@ -64,7 +64,7 @@ class InvitationController extends ApiController
     }
 
 
-    public function useInvitation(CheckInvitationAndStoreNewMarchentRequest $request)
+    public function useInvitation(CheckInvitationAndStoreNewMerchantRequest $request)
     {
     
         $invitation = Invitation::where('invitation_token', $request->invitation_token)->first();
@@ -83,12 +83,12 @@ class InvitationController extends ApiController
             return $this->errorStatus(__('msg.expiredinvitationToken'));//Invitation token expired
         }
 
-        $newMarchent = User::create([
+        $newMerchant = User::create([
             "username" => $request->username,
             "mobile_number"=> $request->mobile_number,
             "email"=> $request->email,
             "fullname"=> $request->fullname,
-            'user_type'=>'Marchent',
+            'user_type'=>'Merchant',
             'password'=>1234,//defualt password and it should be changed in the first login process 
             "distributor_id"=> $invitation->distributor_id,
             'invitation_id' => $invitation->id,
@@ -96,7 +96,7 @@ class InvitationController extends ApiController
         
         $invitation->is_used = true;
         $invitation->used_at = now();
-        $invitation->used_by_id = $newMarchent->id;
+        $invitation->used_by_id = $newMerchant->id;
         $invitation->save();
 
         return $this->successStatus((__('msg.successStatus')));

@@ -42,10 +42,10 @@ Route::prefix('admins')->group(function () {
             Route::put('distributors/updateAccount/{id}', 'Management\DistributorController@updateAccount');
             Route::post('distributors/delete/{id}', 'Management\DistributorController@destroy');
 
-            // Management marchents invitations
-            Route::get('distributors/marchents/invitations/store', 'Management\InvitationController@storeInvitation'); 
-            Route::get('distributors/marchents/invitations/all', 'Management\InvitationController@index');
-            Route::get('distributors/marchents/invitations/{id}', 'Management\InvitationController@show');
+            // Management merchants invitations
+            Route::get('distributors/merchants/invitations/store', 'Management\InvitationController@storeInvitation'); 
+            Route::get('distributors/merchants/invitations/all', 'Management\InvitationController@index');
+            Route::get('distributors/merchants/invitations/{id}', 'Management\InvitationController@show');
 
            // Management chargers
             Route::post('chargers/newAccount', 'Management\ChargerController@createNewAccount');

@@ -14,12 +14,12 @@ use App\Models\Store;
 use App\Models\MasterStore;
 use App\Models\StoreItem;
 
-use App\Http\Requests\Marchents\SalesOrders\StoreSalesOrderRequest;
+use App\Http\Requests\Merchants\SalesOrders\StoreSalesOrderRequest;
 
-use App\Http\Resources\Marchents\SalesOrders\SalesOrderDetailResource;
-use App\Http\Resources\Marchents\SalesOrders\SalesOrderDetailsCollection;
-use App\Http\Resources\Marchents\SalesOrders\SalesOrderResource;
-use App\Http\Resources\Marchents\SalesOrders\SalesOrdersCollection;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrderDetailResource;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrderDetailsCollection;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrderResource;
+use App\Http\Resources\Merchants\SalesOrders\SalesOrdersCollection;
 
 class SalesOrderController extends ApiController
 {

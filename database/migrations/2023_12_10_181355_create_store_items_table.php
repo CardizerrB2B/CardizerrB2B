@@ -23,7 +23,7 @@ return new class extends Migration
 
 
            $table->boolean('sales_order_id')->nullable();
-           $table->unsignedBigInteger('marchent_id')->nullable();
+           $table->unsignedBigInteger('merchant_id')->nullable();
 
            $table->boolean('isSold')->default(0);
            $table->date('sold_date')->nullable();
@@ -35,7 +35,7 @@ return new class extends Migration
            $table->foreign('PO_id')->references('id')->on('purchase_orders');
            $table->foreign('master_store_id')->references('id')->on('master_stores');
            $table->foreign('charger_id')->references('id')->on('users');
-           $table->foreign('marchent_id')->references('id')->on('users');
+           $table->foreign('merchant_id')->references('id')->on('users');
 
 
         });

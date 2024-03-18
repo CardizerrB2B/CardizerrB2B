@@ -10,7 +10,7 @@ class SearchIntoUsersRequest extends APIRequest
     public function rules(): array
     {
         return [
-            'user_type' => 'required|in:Marchent,Charger', 
+            'user_type' => 'required|in:Merchant,Charger', 
             'email' => 'nullable|email',
 
         ];

@@ -16,31 +16,31 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
-class MarchentController extends ApiController
+class MerchantController extends ApiController
 {
-    public function allMyMarchents()
+    public function allMyMerchants()
     {
-        //$marchents = User::withTrashed()->where('user_type','Marchent')// both deleted and not
-        $marchents = User::where('user_type','Marchent')
+        //$merchants = User::withTrashed()->where('user_type','Merchant')// both deleted and not
+        $merchants = User::where('user_type','Merchant')
                      ->where('distributor_id',auth()->user()->id)->get();
-        return new UserProfilesCollection($marchents);
+        return new UserProfilesCollection($merchants);
     }
 
     public function showAccount($id)
     {
-        $marchent = User::whereId($id)->where('user_type','Marchent')
+        $merchant = User::whereId($id)->where('user_type','Merchant')
                      ->where('distributor_id',auth()->user()->id)->first();
-        if (empty($marchent)) {
+        if (empty($merchant)) {
                     return $this->errorStatus(__('msg.errorNotFound'));
                 }
-        return $this->respondWithItem(new UserProfileResource($marchent) );
+        return $this->respondWithItem(new UserProfileResource($merchant) );
     }
 
 
     public function search(SearchUserRequest $request)
     {
         $key = $request->key;
-        $marchents = User::where('user_type','Marchent')
+        $merchants = User::where('user_type','Merchant')
                           ->where('distributor_id',auth()->user()->id)
                           ->when($key,function($q) use($key){
                               $q->where(function($q) use($key){
@@ -50,7 +50,7 @@ class MarchentController extends ApiController
                               });
                           })
                         ->paginate(20);     
-        return new UserProfilesCollection($marchents);
+        return new UserProfilesCollection($merchants);
 
     }
 
@@ -68,7 +68,7 @@ class MarchentController extends ApiController
                 "mobile_number"=> $request->mobile_number,
                 "email"=> $request->email,
                 "fullname"=> $request->fullname,
-                'user_type'=>'Marchent',
+                'user_type'=>'Merchant',
                 'password'=>1234,//defualt password and it should be changed in the first login process 
                 "createdBy_id"=> auth()->user()->id,
                 "distributor_id"=> auth()->user()->id,
@@ -89,26 +89,26 @@ class MarchentController extends ApiController
             return $this->errorStatus(__('msg.checkPassword'));
 
         }else{
-            $marchent = User::where('user_type','Marchent')
+            $merchant = User::where('user_type','Merchant')
                             ->where('distributor_id',auth()->user()->id)->whereId($id)->first();
 
-            if (empty($marchent)) {
+            if (empty($merchant)) {
                 return $this->errorStatus(__('msg.errorNotFound'));
             }
 
             if($request->input('mobile_number'))
             {
-                $marchent->update(['mobile_number'=>$request->mobile_number]);
+                $merchant->update(['mobile_number'=>$request->mobile_number]);
             }
 
             if($request->input('email'))
             {
-                $marchent->update(['email'=>$request->email]);
+                $merchant->update(['email'=>$request->email]);
             }
 
             if($request->input('fullname'))
             {
-                $marchent->update(['fullname'=>$request->fullname]);
+                $merchant->update(['fullname'=>$request->fullname]);
             }
 
             
@@ -124,28 +124,28 @@ class MarchentController extends ApiController
             return $this->errorStatus(__('msg.checkPassword'));
 
         }else{
-            $marchent = User::withTrashed()->whereId($id)->where('distributor_id',auth()->user()->id)->first();
-                if ($marchent->trashed()) {
+            $merchant = User::withTrashed()->whereId($id)->where('distributor_id',auth()->user()->id)->first();
+                if ($merchant->trashed()) {
                     // The record is soft deleted
                     return $this->errorStatus(__('msg.theRecordAlreadyDeleted'));
                 }
-            $marchent->delete();
+            $merchant->delete();
             return $this->respondWithMessage(__('msg.deleted'));
 
         }
 
     }
 
-    public function GetSoftDeletedMarchents()
+    public function GetSoftDeletedmerchants()
     {
-        $softDeletedMarchents = User::onlyTrashed()->get();
+        $softDeletedmerchants = User::onlyTrashed()->get();
 
     }
 
     public function restore($id)
     {
-        $marchent = User::withTrashed()->find($id);
-        $marchent->restore();
+        $merchant = User::withTrashed()->find($id);
+        $merchant->restore();
 
     }
 

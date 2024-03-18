@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Marchents\SalesOrders;
+namespace App\Http\Resources\Merchants\SalesOrders;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class SalesOrdersCollection extends ResourceCollection
+class SalesOrderDetailsCollection extends ResourceCollection
 {
-    public $collects = SalesOrderResource::class;
+    public $collects = SalesOrderDetailResource::class;
 
     public function toArray(Request $request): array
     {

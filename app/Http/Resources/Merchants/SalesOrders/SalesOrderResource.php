@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Marchents\SalesOrders;
+namespace App\Http\Resources\Merchants\SalesOrders;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -17,7 +17,7 @@ class SalesOrderResource extends JsonResource
         return [
             'id'=>$this->id,
             'distributor_id' => $this->distributor_id,
-            'marchent_id' => $this->marchent_id,
+            'merchant_id' => $this->merchant_id,
             'store_id' => $this->store_id,
             'VAT' => $this->VAT,
             'total' => $this->total,

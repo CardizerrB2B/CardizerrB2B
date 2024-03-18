@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Marchents\SalesOrders;
+namespace App\Http\Requests\Merchants\SalesOrders;
 
 use App\Http\Requests\APIRequest;
 class FilterOrderRequest extends APIRequest

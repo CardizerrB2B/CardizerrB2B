@@ -18,18 +18,18 @@ Route::prefix('distributors')->group(function () {
             Route::put('changePassword' , 'AuthDistributorController@chnagePassword');
             Route::get('get/myProfile','AuthDistributorController@showMyProfile');
 
-            // Management marchents
-            Route::post('marchents/newAccount', 'Management\MarchentController@createNewAccount');
-            Route::get('marchents/all', 'Management\MarchentController@allMyMarchents');
-            Route::post('marchents/search', 'Management\MarchentController@search');
-            Route::get('marchents/showAccount/{id}', 'Management\MarchentController@showAccount');
-            Route::put('marchents/updateAccount/{id}', 'Management\MarchentController@updateAccount');
-            Route::post('marchents/delete/{id}', 'Management\MarchentController@destroy');
+            // Management merchants
+            Route::post('merchants/newAccount', 'Management\merchantController@createNewAccount');
+            Route::get('merchants/all', 'Management\merchantController@allMymerchants');
+            Route::post('merchants/search', 'Management\merchantController@search');
+            Route::get('merchants/showAccount/{id}', 'Management\merchantController@showAccount');
+            Route::put('merchants/updateAccount/{id}', 'Management\merchantController@updateAccount');
+            Route::post('merchants/delete/{id}', 'Management\merchantController@destroy');
 
-            // Management marchents invitations
-            Route::get('marchents/invitations/store', 'Management\InvitationController@storeInvitation'); 
-            Route::get('marchents/invitations/all', 'Management\InvitationController@index');
-            Route::get('marchents/invitations/{id}', 'Management\InvitationController@show');
+            // Management merchants invitations
+            Route::get('merchants/invitations/store', 'Management\InvitationController@storeInvitation'); 
+            Route::get('merchants/invitations/all', 'Management\InvitationController@index');
+            Route::get('merchants/invitations/{id}', 'Management\InvitationController@show');
 
          ############################Products Settings#####################################################
 
